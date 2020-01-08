@@ -49,7 +49,7 @@ public class ClockView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (!isInit) {
+        if (!isInit) {git init
             initClock();
         }
         canvas.drawColor(Color.BLACK);
