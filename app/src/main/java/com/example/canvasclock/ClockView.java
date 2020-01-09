@@ -86,12 +86,14 @@ public class ClockView extends View {
 
     private void drawNumberal(Canvas canvas) {
         paint.setTextSize(fontSize);
+
         for (int number : numbers) {
             String tmp = String.valueOf(number);
             paint.getTextBounds(tmp, 0 , tmp.length(),rect);
             double angle = Math.PI/6 * (number -3 );
             int x = (int) (width / 2+ Math.cos(angle)* radius - rect.width()/2);
             int y = (int) (height / 2+ Math.sin(angle)* radius - rect.height()/2);
+            canvas.drawText(tmp,x,y, paint);
         }
     }
 
