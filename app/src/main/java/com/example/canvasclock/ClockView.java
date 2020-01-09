@@ -5,10 +5,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.hardware.Camera;
+import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.Nullable;
 
@@ -26,6 +29,8 @@ public class ClockView extends View {
     private boolean isInit;
     private int[] numbers = {1,2,3,4,5,6,7,8,9,10,11,12};
     private Rect rect = new Rect();
+    Button addButton,minusButton;
+
     public ClockView(Context context) {
         super(context);
     }
@@ -48,6 +53,7 @@ public class ClockView extends View {
         hourHandTruncation = min/7;
         paint = new Paint();
         isInit = true;
+        Button addButton,minusButton;
 
     }
 
@@ -75,14 +81,58 @@ public class ClockView extends View {
                 paint);
     }
 
+
+
+
+
+
+
     private void drawHands(Canvas canvas) {
+
         Calendar c = Calendar.getInstance();
         float hour = c.get(Calendar.HOUR_OF_DAY);
         hour = hour > 12 ? hour -12 : hour;
-        drawHand(canvas, (hour + c.get(Calendar.MINUTE)/ 60) *5f, true);
-        drawHand(canvas, c.get(Calendar.MINUTE),false);
-        drawHand(canvas, c.get(Calendar.SECOND),false);
+        float hourSelf = 12;
+
+        float secondSelf = 30;
+        float minuteSelf = 15;
+        //從這邊設定秒數
+//        Button addButton = findViewById(R.id.addButton);
+//        Button minusButton = findViewById(R.id.minusButton);
+
+//        addButton.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                float hourSelf = 9;
+//
+//
+//            }
+//
+//
+//        });
+
+        //從邊把東西設定過去
+
+
+
+
+
+
+
+
+
+        drawHand(canvas, (hourSelf + minuteSelf/ 60) *5f, true);
+        drawHand(canvas, minuteSelf,false);
+        drawHand(canvas, secondSelf,false);
+
+        //要原本的時間從這裡拿
+//        drawHand(canvas, c.get(Calendar.MINUTE),false);
+//        drawHand(canvas, c.get(Calendar.SECOND),false);
+
+
+        //改變裡面的時間
     }
+
 
     private void drawNumberal(Canvas canvas) {
         paint.setTextSize(fontSize);
@@ -92,8 +142,10 @@ public class ClockView extends View {
             paint.getTextBounds(tmp, 0 , tmp.length(),rect);
             double angle = Math.PI/6 * (number -3 );
             int x = (int) (width / 2+ Math.cos(angle)* radius - rect.width()/2);
+
             int y = (int) (height / 2+ Math.sin(angle)* radius - rect.height()/2);
             canvas.drawText(tmp,x,y, paint);
+
         }
     }
 
@@ -104,8 +156,9 @@ public class ClockView extends View {
     }
 
     private void drawCircle(Canvas canvas) {
+        //outside curcle
         paint.reset();
-        paint.setColor(getResources().getColor(android.R.color.white));
+        paint.setColor(getResources().getColor(android.R.color.holo_green_dark));
         paint.setStrokeWidth(5);
         paint.setStyle(Paint.Style.STROKE);
         paint.setAntiAlias(true);
